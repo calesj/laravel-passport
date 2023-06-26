@@ -23,30 +23,30 @@ Route::post('register', [\App\Http\Controllers\UserController::class, 'register'
 Route::post('login', [\App\Http\Controllers\UserController::class, 'login']);
 
 // ADMINISTRADOR
-Route::prefix('/administrator')->group(function () {
+Route::prefix('/administrator')->middleware('auth:api')->group(function () {
     Route::get('', [\App\Http\Controllers\AdministratorController::class, 'index'])->middleware('can:view-user');
     Route::get('/{id}', [\App\Http\Controllers\AdministratorController::class, 'show'])->middleware('can:view-user');
     Route::post('', [\App\Http\Controllers\AdministratorController::class, 'store'])->middleware('can:create-user');
-    Route::post('/{id}', [\App\Http\Controllers\AdministratorController::class, 'update'])->middleware('can:update-user');
-    Route::delete('', [\App\Http\Controllers\AdministratorController::class, 'delete'])->middleware('can:delete-user');
-})->middleware('auth:api');
+    Route::put('/{id}', [\App\Http\Controllers\AdministratorController::class, 'update'])->middleware('can:update-user');
+    Route::delete('/{id}', [\App\Http\Controllers\AdministratorController::class, 'delete'])->middleware('can:delete-user');
+});
 
 // MODERADOR
-Route::prefix('/moderator')->group(function () {
+Route::prefix('/moderator')->middleware('auth:api')->group(function () {
     Route::get('', [\App\Http\Controllers\ModeratorController::class, 'index'])->middleware('can:view-user');
     Route::get('/{id}', [\App\Http\Controllers\ModeratorController::class, 'show'])->middleware('can:view-user');
     Route::post('', [\App\Http\Controllers\ModeratorController::class, 'store'])->middleware('can:create-user');
-    Route::post('/{id}', [\App\Http\Controllers\ModeratorController::class, 'update'])->middleware('can:update-user');
-    Route::delete('', [\App\Http\Controllers\ModeratorController::class, 'delete'])->middleware('can:delete-user');
-})->middleware('auth:api');
+    Route::put('/{id}', [\App\Http\Controllers\ModeratorController::class, 'update'])->middleware('can:update-user');
+    Route::delete('/{id}', [\App\Http\Controllers\ModeratorController::class, 'delete'])->middleware('can:delete-user');
+});
 
-Route::prefix('/financial')->group(function () {
+Route::prefix('/financial')->middleware('auth:api')->group(function () {
     Route::get('', [\App\Http\Controllers\FinancialController::class, 'index'])->middleware('can:view-user');
     Route::get('/{id}', [\App\Http\Controllers\FinancialController::class, 'show'])->middleware('can:view-user');
-    Route::post('', [\App\Http\Controllers\FinancialController::class, 'create'])->middleware('can:create-user');
-    Route::post('/{id}', [\App\Http\Controllers\FinancialController::class, 'store'])->middleware('can:update-user');
-    Route::delete('', [\App\Http\Controllers\FinancialController::class, 'delete'])->middleware('can:delete-user');
-})->middleware('auth:api');
+    Route::post('', [\App\Http\Controllers\FinancialController::class, 'store'])->middleware('can:create-user');
+    Route::put('/{id}', [\App\Http\Controllers\FinancialController::class, 'update'])->middleware('can:update-user');
+    Route::delete('/{id}', [\App\Http\Controllers\FinancialController::class, 'delete'])->middleware('can:delete-user');
+});
 
 
 
