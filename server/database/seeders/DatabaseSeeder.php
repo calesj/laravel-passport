@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call(AdministratorSeeder::class);
+        $this->call(FinancialSeeder::class);
+        $this->call(ModeratorSeeder::class);
 
         /**
          * USUARIO ADMINISTRADOR
