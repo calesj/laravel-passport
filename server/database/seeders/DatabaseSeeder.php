@@ -49,8 +49,8 @@ class DatabaseSeeder extends Seeder
          * USUARIO FINANCEIRO
          */
         $userFinancial = \App\Models\User::factory()->create([
-            'name' => 'admin',
-            'email' => 'admin@admin.com',
+            'name' => 'financial',
+            'email' => 'financial@admin.com',
             'password' => bcrypt('12345'),
             'user_level' => 'financial'
         ]);
