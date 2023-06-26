@@ -42,4 +42,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * A TABELA USERS, PODE TER MUITOS ADMINISTRADORES VINCULADOS
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function administrators()
+    {
+        return $this->hasMany(Administrator::class);
+    }
+
+    /**
+     * A TABELA USERS, PODE TER MUITOS FINANCEIROS VINCULADOS
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function financials()
+    {
+        return $this->hasMany(Financial::class);
+    }
+
+    /**
+     * A TABELA USERS, PODE TER MUITOS MODERADORES VINCULADOS
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function moderators()
+    {
+        return $this->hasMany(Moderator::class);
+    }
 }
