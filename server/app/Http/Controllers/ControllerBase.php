@@ -53,12 +53,17 @@ abstract class ControllerBase extends Controller
         $user->password = $password;
         $user->save();
 
-        // CADASTRANDO USUARIO COMO ADMINISTRADOR
+        // CADASTRANDO USUARIO COM SUA RESPECTIVA MODEL DE ACESSO
         $adm = new $this->model();
         $adm->user_id = $user->id;
         $adm->save();
+
+        return response()->json([
+            'success' => 'true',
+            'message' => 'registro cadastrado'
+        ]);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $validate = FormValidation::validate($request->only(['name', 'email', 'password']), $this->rules);
 
@@ -87,6 +92,11 @@ abstract class ControllerBase extends Controller
         $adm = new $this->model();
         $adm->user_id = $user->id;
         $adm->save();
+
+        return response()->json([
+            'success' => 'true',
+            'message' => 'registro atualizado'
+        ]);
     }
 
     public function delete($id)
@@ -97,5 +107,9 @@ abstract class ControllerBase extends Controller
         }
 
         $adm->delete();
+        return response()->json([
+            'success' => 'true',
+            'message' => 'registro deletado'
+        ]);
     }
 }
