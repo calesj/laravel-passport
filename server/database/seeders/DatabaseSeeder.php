@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Administrator;
 use App\Models\Financial;
+use App\Models\Financial2;
 use App\Models\Moderator;
 use Illuminate\Database\Seeder;
 
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdministratorSeeder::class);
         $this->call(FinancialSeeder::class);
+        $this->call(Financial2Seeder::class);
         $this->call(ModeratorSeeder::class);
 
         /**
@@ -51,13 +53,27 @@ class DatabaseSeeder extends Seeder
          * USUARIO FINANCEIRO
          */
         $userFinancial = \App\Models\User::factory()->create([
+            'name' => 'financial2',
+            'email' => 'financial2@email.com',
+            'password' => bcrypt('12345'),
+            'user_level' => 'financial_2'
+        ]);
+
+        $financial = new Financial();
+        $financial->user_id = $userFinancial->id;
+        $financial->save();
+
+        /**
+         * USUARIO FINANCEIRO2
+         */
+        $userFinancial2 = \App\Models\User::factory()->create([
             'name' => 'financial',
-            'email' => 'financial@admin.com',
+            'email' => 'financial@email.com',
             'password' => bcrypt('12345'),
             'user_level' => 'financial'
         ]);
 
-        $financial = new Financial();
+        $financial = new Financial2();
         $financial->user_id = $userFinancial->id;
         $financial->save();
     }
