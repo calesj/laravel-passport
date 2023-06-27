@@ -33,7 +33,7 @@ class UserPolicy
     /**
      * QUEM PODE ATUALIZAR UM REGISTRO
      */
-    public function update(User $user, User $model): bool
+    public function update(User $user): bool
     {
         if ($user->user_level === 'administrator' || $user->user_level === 'financial' || $user->user_level === 'financial_2') {
             return true;
@@ -45,7 +45,7 @@ class UserPolicy
     /**
      * QUEM PODE EXCLUIR UM REGISTRO
      */
-    public function delete(User $user, User $model): bool
+    public function delete(User $user): bool
     {
         if ($user->user_level === 'administrator' || $user->user_level === 'financial') {
             return true;
